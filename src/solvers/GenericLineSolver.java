@@ -7,9 +7,7 @@ public class GenericLineSolver<T> {
     public List<List<T>> allCombinations(final T[] blacks, final T[] whites) {
         List<List<T>> result = new ArrayList<>();
         List<T> currentCombination = new ArrayList<>();
-
         generateCombinations(blacks, whites, 0, 0, currentCombination, result);
-
         return result;
     }
 
