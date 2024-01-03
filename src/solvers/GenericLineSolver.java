@@ -3,7 +3,7 @@ package solvers;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineSolver <T> {
+public class GenericLineSolver<T> {
     public List<List<T>> allCombinations(final T[] blacks, final T[] whites) {
         List<List<T>> result = new ArrayList<>();
         List<T> currentCombination = new ArrayList<>();

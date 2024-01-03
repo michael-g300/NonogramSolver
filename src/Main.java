@@ -1,29 +1,22 @@
-import components.Board;
-import solvers.SingleColorSolver;
+import components.CellSequence;
+import components.CellType;
+import solvers.GenericLineSolver;
+import solvers.SingleCellLineSplitter;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        final List<List<Integer>> rows = new ArrayList<>();
-        final List<List<Integer>> cols = new ArrayList<>();
-        Board board;
+        CellSequence[] array1 = {new CellSequence(1, CellType.BLACK), new CellSequence(2, CellType.BLACK), new CellSequence(3, CellType.BLACK)};
+        CellSequence[] array2 = {new CellSequence(4, CellType.WHITE), new CellSequence(5, CellType.WHITE), new CellSequence(1, CellType.WHITE)};
 
-        rows.add(List.of(3));
-        rows.add(Arrays.asList(2,2));
-        rows.add(Arrays.asList(1,1));
+        GenericLineSolver<CellSequence> integerLineSolver = new GenericLineSolver<>();
+        List<List<CellSequence>> combinations = integerLineSolver.allCombinations(array1, array2);
+        List<List<CellType>> isolatedCellCombinations = SingleCellLineSplitter.isolateCells(combinations);
 
-        cols.add(List.of(1));
-        cols.add(List.of(2));
-        cols.add(Arrays.asList(1,1));
-        cols.add(List.of(2));
-        cols.add(List.of(2));
-
-        board = new Board(rows.size(), cols.size());
-
-        SingleColorSolver.solve(rows, cols, board);
-        board.printBoard();
+        System.out.println("Combinations:");
+        for (List<CellType> combination : isolatedCellCombinations) {
+            System.out.println(combination);
+        }
     }
 }
