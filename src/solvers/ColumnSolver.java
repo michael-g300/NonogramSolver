@@ -32,9 +32,9 @@ public class ColumnSolver {
                     }
                 }
             }
-            if(!checkRemainingVacancy(currentSequence, height - rows.size(), currentCol)) {
-                return false;
-            }
+//            if(!checkRemainingVacancy(currentSequence, height - rows.size(), currentCol)) {
+//                return false;
+//            }
         }
         return true;
     }
@@ -51,6 +51,9 @@ public class ColumnSolver {
 
     private boolean checkRemainingVacancy(final int currentSequence, final int remainingHeight, final List<Integer> remainingCol) {
         if (currentSequence > 0) {
+            if (remainingCol.isEmpty()) {
+                return false;
+            }
             remainingCol.set(0, remainingCol.get(0) - currentSequence);
         }
         int remainingSequences = 0;
