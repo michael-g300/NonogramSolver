@@ -24,16 +24,20 @@ public class AdvancedSCL {
         checkForOverlap();
     }
 
+    //for test purposes
     public Board getBoard() {return m_board;}
+
+    //for test purposes
+    public List<Integer> getWaitingList() {return m_linesQueue;}
 
     private void checkForOverlap () {
         for (int i = 0 ; i < (m_board.getRows() + m_board.getCols()) ; ++i) {
             if (i < m_board.getRows()) {
                 checkLineForOverlap(i, m_rows.get(i));
             }
-//            else {
-//                checkLineForOverlap(i, m_cols.get(i - m_board.getRows()));
-//            }
+            else {
+                checkLineForOverlap(i, m_cols.get(i - m_board.getRows()));
+            }
         }
     }
     private void checkLineForOverlap(final int lineNum, final List<Integer> line) {
@@ -55,9 +59,15 @@ public class AdvancedSCL {
                 for (int i = 0 ; i < (num - spareCells) ; ++i) {
                     if (lineNum < m_board.getRows()) {
                         m_board.colorCell(lineNum, currentCell, CellType.BLACK);
+                        if (!m_linesQueue.contains(currentCell + m_board.getRows())) {
+                            m_linesQueue.add(currentCell + m_board.getRows());
+                        }
                     }
                     else {
-                        m_board.colorCell(currentCell, lineNum, CellType.BLACK);
+                        m_board.colorCell(currentCell, lineNum - m_board.getRows(), CellType.BLACK);
+                        if (!m_linesQueue.contains(currentCell)) {
+                            m_linesQueue.add(currentCell);
+                        }
                     }
                     ++currentCell;
                 }

@@ -12,10 +12,16 @@ class AdvancedSCLTest {
 
     @Test
     void solve() {
-        final AdvancedSCL solver = new AdvancedSCL(List.of(List.of(1, 2, 3)), List.of(List.of(1),List.of(1),List.of(1),List.of(1),List.of(1),List.of(1),List.of(1),List.of(1),List.of(1),List.of(1)));
+        final AdvancedSCL solver = new AdvancedSCL(List.of(List.of(2, 2, 3)), List.of(List.of(0),List.of(0),List.of(0),List.of(0),List.of(0),List.of(0),List.of(0),List.of(0),List.of(0),List.of(0)));
         solver.solve();
         final Board solvedBoard = solver.getBoard();
+
+        assertEquals(solvedBoard.getCell(0, 1), CellType.BLACK);
+        assertEquals(solvedBoard.getCell(0, 4), CellType.BLACK);
         assertEquals(solvedBoard.getCell(0, 7), CellType.BLACK);
-        assertEquals(solvedBoard.getCell(0, 6), null);
+        assertEquals(solvedBoard.getCell(0, 8), CellType.BLACK);
+        assertNull(solvedBoard.getCell(0, 2));
+
+        assertEquals(solver.getWaitingList(), List.of(2,5,8,9));
     }
 }
